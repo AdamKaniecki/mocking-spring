@@ -24,16 +24,15 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-//  Argumentmatchers.any() mówi że jeśli do tej zaślepki(pole w klasie testowanej)
-//  do tej metody(firstMethod()) wpadnie jakiś argument to Mockito
-//  zwróci wartość "coś w testach"
+//do metody firstMetod wszedł pies czyli cokolwiek i firstMethod zwraca "coś w testach"
+//        ewentualnie może być zapis ArgumentMatchers.any(Dog.class)- da taki sam efekt
         Mockito.when(injectedService.firstMetod(ArgumentMatchers.any())).thenReturn("coś w testach");
 //        when
-        String result1 = classWithDependency.secondMethod("coś w testach1");
-        String result2 = classWithDependency.secondMethod("coś w testach2");
-        String result3 = classWithDependency.secondMethod("coś w testach3");
-        String result4 = classWithDependency.secondMethod("coś w testach4");
-        String result5 = classWithDependency.secondMethod("coś w testach5");
+        String result1 = classWithDependency.secondMethod(new Dog());
+        String result2 = classWithDependency.secondMethod(new Dog());
+        String result3 = classWithDependency.secondMethod(new Dog());
+        String result4 = classWithDependency.secondMethod(new Dog());
+        String result5 = classWithDependency.secondMethod(new Dog());
 //        then
 
         assertEquals(result1, "coś w testach");
