@@ -10,7 +10,7 @@ public class ClassWithDependency implements ServiceWithDependency{
     }
 
     @Override
-    public String secondMethod(String inputString) {
-        return injectedService.firstMetod(inputString, "coś");
+    public String secondMethod() {
+        return injectedService.firstMetod("coś");
     }
 }

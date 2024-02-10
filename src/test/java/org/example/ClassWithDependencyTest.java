@@ -1,6 +1,7 @@
 package org.example;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -26,18 +27,17 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-//jeśli dodamy eq("wartość), anyString lub "wartość2" no to Mockito wtedy sprawdza co było podane do metody firstMethod
-//        i stubbing działa jeśli ustalenia pokrywają się z kodem źródłowym
-        Mockito.when(injectedService.firstMetod(eq("coś w testach1"), anyString())).thenReturn("coś w testach");
+//    jeśli metoda w kodzie źródłowym przyjmie jakiegokolwiek Stringa to rzuć  wyjątek
+        Mockito.when(injectedService.firstMetod(ArgumentMatchers.anyString())).thenThrow(
+                new RuntimeException("my exception")
+        );
+//        przy wywołaniu metody secondMethod w teście jeśli został wyrzucony odpowiedni wyjątek to zalicz test
+
 //        when
-        String result1 = classWithDependency.secondMethod("coś w testach1");
-        String result2 = classWithDependency.secondMethod("coś w testach2");
-        String result3 = classWithDependency.secondMethod("coś w testach3");
-        String result4 = classWithDependency.secondMethod("coś w testach4");
-        String result5 = classWithDependency.secondMethod("coś w testach5");
+        Assertions.assertThrows(RuntimeException.class,()-> classWithDependency.secondMethod());
+
 //        then
 
-        assertEquals(result1, "coś w testach");
 
     }
 
