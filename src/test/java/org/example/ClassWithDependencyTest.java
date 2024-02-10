@@ -1,39 +1,34 @@
 package org.example;
 
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockitoExtension.class)
 class ClassWithDependencyTest {
 
+    @InjectMocks
+    ClassWithDependency classWithDependency;
+
+    @Mock
+    InjectedService injectedService;
 
     @Test
-    void secondMethod() {
-
-//       given
-
-        ServiceWithDependency serviceWithDependency = new ClassWithDependency();
-//        tu na potrzeby testów mogę wstrzyknąć inną implementację InjectedService
-        serviceWithDependency.setInjectedService(new StubInjectedBeanService());
-
-
+    void sampleMethod(){
+//        given
+        Mockito.when(injectedService.firstMetod()).thenReturn(true);
 //        when
-        boolean result = serviceWithDependency.secondMethod();
-
+boolean result = classWithDependency.secondMethod();
 //        then
-        Assertions.assertEquals(true, result);
+        assertTrue(result);
 
     }
 
 
-    //klasa która tak jak InjectedServiceImpl implementuje InjectedService, ale implementacja
-// metody firstMethod jest inna (true-false)
-    static class StubInjectedBeanService implements InjectedService {
-
-        @Override
-        public boolean firstMetod() {
-            return true;
-        }
-    }
 }
