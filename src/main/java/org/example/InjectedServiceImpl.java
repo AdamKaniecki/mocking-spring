@@ -3,6 +3,11 @@ package org.example;
 public class InjectedServiceImpl implements InjectedService{
     @Override
     public String firstMethod() {
-        return "coś w kodzie źródłowym ";
+        return "kod1 ";
+    }
+
+    @Override
+    public String thirdMethod() {
+        return "kod2 ";
     }
 }
