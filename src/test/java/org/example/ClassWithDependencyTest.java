@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 class ClassWithDependencyTest {
@@ -24,9 +26,9 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-// jeśli metoda firstMetod zostanie wywołana z konktretną wartością to wtedy stubbing zadziała, a jak nie to
-//        Mockito zwróci nulla i test się nie powiedzie
-        Mockito.when(injectedService.firstMetod("coś w testach1")).thenReturn("coś w testach");
+//jeśli dodamy eq("wartość), anyString lub "wartość2" no to Mockito wtedy sprawdza co było podane do metody firstMethod
+//        i stubbing działa jeśli ustalenia pokrywają się z kodem źródłowym
+        Mockito.when(injectedService.firstMetod(eq("coś w testach1"), anyString())).thenReturn("coś w testach");
 //        when
         String result1 = classWithDependency.secondMethod("coś w testach1");
         String result2 = classWithDependency.secondMethod("coś w testach2");
