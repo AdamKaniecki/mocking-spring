@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,14 +26,15 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-//    jeśli metoda w kodzie źródłowym przyjmie jakiegokolwiek Stringa to rzuć  wyjątek
-        Mockito.when(injectedService.firstMetod(ArgumentMatchers.anyString())).thenThrow(
-                new RuntimeException("my exception")
-        );
-//        przy wywołaniu metody secondMethod w teście jeśli został wyrzucony odpowiedni wyjątek to zalicz test
+//jeśli metoda firstMethod przyjmie jakiegoś Stringa to Stubber zwróci wartość "some value
+        Mockito.doReturn("some value")
+                .when(injectedService)
+                        .firstMethod(ArgumentMatchers.anyString());
 
+//jeśli Stubber zwróci wartość "some value" to zalicz wynik tesu
 //        when
-        Assertions.assertThrows(RuntimeException.class,()-> classWithDependency.secondMethod());
+        String result = classWithDependency.secondMethod();
+        Assertions.assertEquals("some value", result);
 
 //        then
 
