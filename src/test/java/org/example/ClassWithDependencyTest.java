@@ -24,15 +24,15 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-//do metody firstMetod wszedł pies czyli cokolwiek i firstMethod zwraca "coś w testach"
-//        ewentualnie może być zapis ArgumentMatchers.any(Dog.class)- da taki sam efekt
-        Mockito.when(injectedService.firstMetod(ArgumentMatchers.any())).thenReturn("coś w testach");
+// jeśli metoda firstMetod zostanie wywołana z konktretną wartością to wtedy stubbing zadziała, a jak nie to
+//        Mockito zwróci nulla i test się nie powiedzie
+        Mockito.when(injectedService.firstMetod("coś w testach1")).thenReturn("coś w testach");
 //        when
-        String result1 = classWithDependency.secondMethod(new Dog());
-        String result2 = classWithDependency.secondMethod(new Dog());
-        String result3 = classWithDependency.secondMethod(new Dog());
-        String result4 = classWithDependency.secondMethod(new Dog());
-        String result5 = classWithDependency.secondMethod(new Dog());
+        String result1 = classWithDependency.secondMethod("coś w testach1");
+        String result2 = classWithDependency.secondMethod("coś w testach2");
+        String result3 = classWithDependency.secondMethod("coś w testach3");
+        String result4 = classWithDependency.secondMethod("coś w testach4");
+        String result5 = classWithDependency.secondMethod("coś w testach5");
 //        then
 
         assertEquals(result1, "coś w testach");

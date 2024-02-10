@@ -3,5 +3,5 @@ package org.example;
 public interface ServiceWithDependency {
 
     void setInjectedService(InjectedService injectedService);
-    String secondMethod(Dog inputDog);
+    String secondMethod(String inputString);
 }
