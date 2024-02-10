@@ -2,7 +2,7 @@ package org.example;
 
 public class InjectedServiceImpl implements InjectedService{
     @Override
-    public boolean firstMetod() {
-        return false;
+    public String firstMetod(String inputString) {
+        return "coś w kodzie źródłowym " + inputString;
     }
 }
