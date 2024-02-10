@@ -26,12 +26,10 @@ class ClassWithDependencyTest {
     @Test
     void sampleMethod() {
 //        given
-//jeśli metoda firstMethod przyjmie jakiegoś Stringa to Stubber zwróci wartość "some value
-        Mockito.doReturn("some value")
-                .when(injectedService)
-                        .firstMethod(ArgumentMatchers.anyString());
+//najlepiej stosować tą konwencje when-then
+       Mockito.when(injectedService.firstMethod()).thenReturn("some value");
 
-//jeśli Stubber zwróci wartość "some value" to zalicz wynik tesu
+
 //        when
         String result = classWithDependency.secondMethod();
         Assertions.assertEquals("some value", result);
