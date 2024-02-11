@@ -11,7 +11,9 @@ public class ClassWithDependency implements ServiceWithDependency{
 
     @Override
     public String secondMethod() {
-        return  injectedService.thirdMethod() +
-                injectedService.firstMethod();
+        return
+                injectedService.firstMethod() +
+                injectedService.thirdMethod();
+
     }
 }
